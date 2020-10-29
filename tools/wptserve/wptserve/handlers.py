@@ -24,6 +24,18 @@ __all__ = ["file_handler", "python_script_handler",
            "as_is_handler", "ErrorHandler", "BasicAuthHandler"]
 
 
+# Add root of WPT to the path, for py file handler imports.
+# TODO: This should obviously be done in a more central location, and less hackily.
+# TODO: This does not actually seem to be needed - wpt root is already on the path!
+#_WPT_ROOT = os.path.join(
+#    os.path.dirname(os.path.abspath(__file__)),
+#    '..', # tools/wptserve/
+#    '..', # tools/
+#    '..', # WPT ROOT
+#)
+#sys.path.insert(0, _WPT_ROOT)
+
+
 def guess_content_type(path):
     ext = os.path.splitext(path)[1].lstrip(".")
     if ext in content_types:
@@ -300,11 +312,8 @@ class PythonScriptHandler(object):
         """
         path = filesystem_path(self.base_path, request, self.url_base)
 
-        sys_path = sys.path[:]
-        sys_modules = sys.modules.copy()
         try:
             environ = {"__file__": path}
-            sys.path.insert(0, os.path.dirname(path))
             with open(path, 'rb') as f:
                 exec(compile(f.read(), path, 'exec'), environ, environ)
 
@@ -313,9 +322,6 @@ class PythonScriptHandler(object):
 
         except IOError:
             raise HTTPException(404)
-        finally:
-            sys.path = sys_path
-            sys.modules = sys_modules
 
     def __call__(self, request, response):
         def func(request, response, environ, path):
