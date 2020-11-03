@@ -116,11 +116,11 @@ the dimensions of the image in pixels. Then <code>maxDifference =
 max<sub>x=[0,width) y=[0,height), c={r,g,b}</sub>(|T<sub>x,y,c</sub> -
 R<sub>x,y,c</sub>|)</code>.
 
-To specify the fuzziness for a given test one may add a `<meta name=fuzzy>`
+To specify the fuzziness for a given test, one may add a `<meta name=fuzzy>`
 element to the test file (or, in the case of more complex tests that e.g. have
 subframes, to any page containing the `<link rel=[mis]match>` elements). The
 meta element should have a `content` attribute containing the parameters above,
-separated by a semi-colon:
+separated by a semicolon:
 
 ```
 <meta name=fuzzy content="maxDifference=15;totalPixels=300">
