@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>CSS Grid Layout Test: Margin auto and replaced grid item</title>
+<link rel="author" title="Hyunjune Kim" href="mailto:hyunjune.kim@samsung.com">
+<link rel="help" href="https://www.w3.org/TR/css-grid-1/#alignment">
+<meta name="assert" content="Checks width of the nested grid container applied 'margin:auto' with a replaced item which has a property called max-height.">
+<link rel="match" href="grid-auto-margin-and-replaced-item-001-ref.html">
+<style>
+  .grid {
+    display: grid;
+  }
+  .grid > div {
+    display: grid;
+    margin: auto;
+  }
+  img {
+    max-height: 100%;
+  }
+</style>
+<div class="grid">
+  <div>
+    <img src="./support/100x100-green.png">
+  </div>
+</div>
