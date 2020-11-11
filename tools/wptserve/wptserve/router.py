@@ -101,7 +101,7 @@ class Router(object):
         self.logger = get_logger()
 
         # Add the doc_root to the Python path, so that any Python handler can
-        # correctly locate helper scripts (see RFC_TO_BE_LINKED).
+        # correctly locate helper scripts (see https://github.com/web-platform-tests/rfcs/pull/68).
         #
         # TODO: In a perfect world, Router would not need to know about this
         # and the handler itself would take care of it. Currently, however, we
